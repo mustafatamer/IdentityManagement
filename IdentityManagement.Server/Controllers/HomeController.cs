@@ -36,7 +36,7 @@ namespace IdentityManagement.Server.Controllers
         public async Task<IActionResult> Privacy()
         {
             var claims = HttpContext.User.Claims.Select(x => $"{x.Type}:{x.Value}");
-            return Ok(new
+            return Ok(new 
             {
                 Name = "Values API",
                 Claims = claims.ToArray()

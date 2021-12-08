@@ -32,12 +32,12 @@ namespace IdentityManagement.Infrastructure.Extensions
                     .AddDeveloperSigningCredential()
                     .AddOperationalStore(options =>
                     {
-                        options.ConfigureDbContext = builder => builder.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+                        options.ConfigureDbContext = builder => builder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
                         options.EnableTokenCleanup = true;
                     })
                      .AddConfigurationStore(options =>
                      {
-                         options.ConfigureDbContext = builder => builder.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+                         options.ConfigureDbContext = builder => builder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
                      })
                     .AddAspNetIdentity<AppUser>();
             return services;
@@ -51,9 +51,9 @@ namespace IdentityManagement.Infrastructure.Extensions
 
         public static IServiceCollection AddDatabaseConfiguration(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<AppIdentityDbContext>(options => options.UseNpgsql(connectionString));
-            services.AddDbContext<AppPersistedGrantDbContext>(options => options.UseNpgsql(connectionString));
-            services.AddDbContext<AppConfigurationDbContext>(options => options.UseNpgsql(connectionString));
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<AppPersistedGrantDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<AppConfigurationDbContext>(options => options.UseSqlServer(connectionString));
             return services;
         }
     }
